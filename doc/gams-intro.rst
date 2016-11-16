@@ -127,7 +127,7 @@ integer elements 1 to 168:
 
 ::
     
-    set t timesteps / 1\*168 /;
+    set t timesteps / 1*168 /;
 
 Subsets can be created by naming the superset in parenthesis after the
 set name. Elements of the subsets then need to be elements of the
@@ -150,7 +150,7 @@ ord and card that exploit implicit ordering of static sets like t
 
 ::
     
-    set t timesteps / 1\*8760 /;
+    set t timesteps / 1*8760 /;
     set tfirst(t) initial timestep;
     tlast(t) = yes$(ord(t) eq card(t));
 

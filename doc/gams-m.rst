@@ -492,7 +492,7 @@ the absolute path directly:
 
 ::
     
-    g = GAMS(struct('gams','C:/GAMS/gams.xe'))
+    g = GAMS(struct('gams','C:/GAMS/gams.exe'))
 
 The following example shows how to specify a different model filename
 and result file:
