@@ -162,7 +162,7 @@ the dot (.) character:
     
     set co commodities / Coal, Gas, Oil /;
     set pro process names / gt, pp, cc /;
-    set process\_chain(co,pro) / Coal.pp, Coal.cc, Gas.gt, Oil.pp /;
+    set process_chain(co,pro) / Coal.pp, Coal.cc, Gas.gt, Oil.pp /;
 
 It is possible to assign an alias to any set. This can be useful either
 for having a shorter name and is necessary for defining certain types of
@@ -228,6 +228,10 @@ parameter definition:
 
 The resulting data structure can be visualised as a cube/array with
 three dimensions. Each direction corresponds to one of the onsets:
+
+.. image:: img/db-process.png
+   :width: 50%
+   :align: center
 
 Variables
 ---------

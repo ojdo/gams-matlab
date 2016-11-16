@@ -1,3 +1,4 @@
+.. highlight:: matlab
 
 GAMS.m
 ======
@@ -41,7 +42,7 @@ it easy to create a new model fast, but makes it difficult to change
 parameter values. The easiest way to overcome this limitation is to use
 the ``$include`` command in a parameter's data section:
 
-::
+.. code-block:: gams
     
     set tech /
     $include "data/set_tech.txt"
@@ -53,7 +54,7 @@ the ``$include`` command in a parameter's data section:
 The text file *param\_invcost.txt* then could contain the following lines,
 where each entry must be a member of the set ``tech``:
 
-::
+.. code-block:: gams
     
     pv = 2000
     wind = 1500
@@ -75,7 +76,7 @@ example.
 
 **Before:** with inline data
     
-::                                 
+.. code-block::                                 
                                    
     set source / a, b, c /;        
     set sink / x, y, z /;          
@@ -84,7 +85,7 @@ example.
                                    
 **After:** with GDX file input
 
-::
+.. code-block::
 
     $gdxin input_file.gdx
     set source;
@@ -111,7 +112,7 @@ While set and parameter declarations remain unchanged, the data sections
 are replaced by $load statements. The variable and equation parts are
 not shown as they are not affected by the change.
 
-::
+.. code-block::
     
     $title Electric fuel station model (fuelstation.gms)
     
@@ -194,7 +195,7 @@ the desired set elements as a cell array of strings:
     elements = {'a' 'b' 'c'};
     A = GAMS.set('A', elements);
 
-Function GAMS.set takes two arguments. The first is the name of the set
+Function ``GAMS.set`` takes two arguments. The first is the name of the set
 as it is used in the GMS model file. The second is a cell array of the
 set elements. The resulting variable A is a structure with the following
 fields:
@@ -264,14 +265,14 @@ case of a scalar parameter, the onset can be left out:
     
     cpd = GAMS.param('cost_per_dist', 29.95)
 
-Like GAMS.set, the first function argument specifies the name of the
-parameter as it will be visible for GAMS. Here is an example for a
+Like ``GAMS.set``, the first function argument of ``GAMS.param`` specifies the 
+ame of the parameter that will be visible for GAMS. Here is an example for a
 typical, one-dimensional parameter:
 
 ::
     
     sites = {'AT' 'CH' 'DE'};
-    vals = [8.4 7.6 82.1]\*1e6;
+    vals = [8.4 7.6 82.1] * 1e6;
     pop = GAMS.param('pop_per_country', vals, {sites})
 
 Here sites is a list of countries and vals is a vector of population
@@ -313,7 +314,7 @@ following example demonstrates this usage:
     db_pro = GAMS.param('db_pro',vals,{pros atts})
 
 
-Function GAMS.param returns a MATLAB struct with the following fields:
+Function ``GAMS.param`` returns a MATLAB struct with the following fields:
 
 +-----------+-----------------------------------------------------------------------------+
 | Field     | Explanation                                                                 |
@@ -335,6 +336,10 @@ Function GAMS.param returns a MATLAB struct with the following fields:
 
 The numerical array val can be visualised like an n-dimensional array of
 values, here shown for the previous example:
+
+.. image:: img/db-pro-val.png
+   :width: 50%
+   :align: center
 
 In order to identify and address the values in the value array val, the
 interpretation for a given position (uels) and position for a given
@@ -447,6 +452,7 @@ value. It can be read from the GDX file using the optional fourth
 argument that specifies the field to be read:
 
 ::
+    
     some_constraint = GAMS.getGDX('result.gdx', 'some_constraint', '', 'm')
 
 Variables are identical in structure to parameters. They even can be
@@ -726,7 +732,7 @@ parameter:
     [ts t cols onsets] = GAMS.getXLS('ts.xls', 'SupIm', 'timeseries');
 
 Note that entities and timeseries are read by the same function
-GAMS.getXLS. Timeseries need the third optional argument set to the
+``GAMS.getXLS``. Timeseries need the third optional argument set to the
 value 'timeseries'. The set t contains the first column as a set with
 correct uels (they don't need to be consecutive integers). Set cols is a
 one- or multi-dimensional set of the column titles. Multi-dimensional
@@ -759,7 +765,7 @@ allow for normalising
 Normalising
 ~~~~~~~~~~~
 
-The function GAMS.rectify was developed to overcome a limitation of the
+The function ``GAMS.rectify`` was developed to overcome a limitation of the
 GDX file format: uels that correspond only to zero values are left out.
 This especially made it difficult to plot timeseries of energy storage
 input/output that occurs only from time to time. The following example
@@ -778,6 +784,7 @@ dem.val and estin.val would therefore fail badly. The following call
 fixes the situation:
 
 ::
+    
     estin = GAMS.rectify(estin,tm.uels)
 
 Now estin is also defined over all 24 timesteps. Missing values are
@@ -815,7 +822,7 @@ Summing
 ~~~~~~~
 
 Huge, multi-dimensional variables and parameters can hardly be
-interpreted by viewing their raw data. Function GAMS.sum adds values
+interpreted by viewing their raw data. Function ``GAMS.sum`` adds values
 over one or more dimensions and returning a new data structures with
 reduced dimensionality and fitting uels. In the following example,
 variable eprout is a five-dimensional variable defined over time, site,
@@ -832,7 +839,7 @@ and site, the following two lines are sufficient:
     eprout_sum  = GAMS.sum(eprout, [1 3 5])
     % result: eprout_sum(site, coin)
 
-One remark: The results of GAMS.sum are perfectly suited to be written
+One remark: The results of ``GAMS.sum`` are perfectly suited to be written
 to an XLS table using GAMS.putXLS:
 
 ::
@@ -840,7 +847,8 @@ to an XLS table using GAMS.putXLS:
 	eprout_sum.name = 'Electricity by Commodity';
 	GAMS.putXLS('report.xlsx', eprout_sum)
 	% bar chart in Excel
-    |barchart|
+    
+.. image:: img/barchart.png
 
 Generally, putXLS takes an arbitrary number of arguments (sets,
 parameters, variables, equations) and writes their contents to separate
@@ -868,8 +876,9 @@ values from dem1:
     % merge both parameters
     dem = GAMS.merge(dem1, dem2)
 
-In the URBS rolling horizon case, timeseries from the individual runs
-are appended one after another by using merge in a loop:
+If you have variables from multiple runs, e.g. timeseries with partly 
+overlapping timesteps, one could append the newest values to the end by using 
+merge in a loop:
 
 ::
     
@@ -907,6 +916,3 @@ values, just type the following command in the MATLAB Command Window:
    This can be changed in Microsoft Windows advanced system settings
    under "environment variables".
 
-.. |barchart| image:: barchart.png
-   :width: 2.5in
-   :height: 1.6in
