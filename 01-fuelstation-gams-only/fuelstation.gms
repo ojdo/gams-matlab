@@ -25,7 +25,7 @@ Variables
     s          size of accumulator (MWh)
     st(t)      evolution of accumulator SOC (MWh)
     tp(t)      total production of plants per timestep (MWh)
-    z          total cost (k�)
+    z          total cost (kEUR)
     sell(t);
 
 Positive Variables x, s, st, sell;

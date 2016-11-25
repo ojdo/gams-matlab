@@ -12,8 +12,8 @@ Sets     tfirst(t)  first timestep
          tlast(t)  = yes$(ord(t) eq card(t));
 
 Parameters
-         cs         cost of storage tank (k€ per MWh)
-         c(i)       cost of plant (k€ per MW)
+         cs         cost of storage tank (kEUR per MWh)
+         c(i)       cost of plant (kEUR per MW)
          d(t)       demand (MWh)
          cf(t,i)    relative (normalized to 1) production of plants;
 $load    cs c cf d=demand
@@ -23,7 +23,7 @@ Variables
     s          size of accumulator (MWh)
     st(t)      evolution of accumulator SOC (MWh)
     tp(t)      total production of plants per timestep (MWh)
-    z          total cost (k€)
+    z          total cost (kEUR)
     sell(t);
 
 Positive Variables x, s, st, sell;
