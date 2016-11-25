@@ -1679,8 +1679,8 @@ classdef GAMS < handle
                         try
                             % Throws an error if the sheets do not exist.
                             objExcel.ActiveWorkbook.Worksheets.Item([sheetName{:} num2str(s)]).Delete;
-                        catch  %#ok<CTCH>
-                            ; %#ok<NOSEM> % do nothing
+                        catch
+                            % do nothing
                         end
                     end
                 end
