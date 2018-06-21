@@ -42,7 +42,7 @@ it easy to create a new model fast, but makes it difficult to change
 parameter values. The easiest way to overcome this limitation is to use
 the ``$include`` command in a parameter's data section:
 
-.. code-block:: gams
+::
     
     set tech /
     $include "data/set_tech.txt"
@@ -55,7 +55,7 @@ The text file *param\_invcost.txt* then could contain the following lines,
 where each entry must be a member of the set ``tech``:
 
 .. code-block:: gams
-    
+
     pv = 2000
     wind = 1500
     hydro = 900
@@ -76,17 +76,17 @@ example.
 
 **Before:** with inline data
     
-.. code-block::                                 
-                                   
+::
+    
     set source / a, b, c /;        
     set sink / x, y, z /;          
     parameter dist(source, sink)   
-    / a.x 71, […], c.z 43 /;       
-                                   
+    / a.x 71, a.y 42, [...], c.z 43 /;       
+
 **After:** with GDX file input
 
-.. code-block::
-
+::
+    
     $gdxin input_file.gdx
     set source;
     set sink;
@@ -112,7 +112,7 @@ While set and parameter declarations remain unchanged, the data sections
 are replaced by $load statements. The variable and equation parts are
 not shown as they are not affected by the change.
 
-.. code-block::
+::
     
     $title Electric fuel station model (fuelstation.gms)
     
