@@ -747,11 +747,11 @@ one-dimensional onsets of cols in a cell array of GAMS sets.
 | The first column *should* be labelled "t".                                        |
 +-----------------------------------------------------------------------------------+
 | Column caption tuples must obey set element naming rules stated in section 1.2.   |
-|                                                                                   |
++-----------------------------------------------------------------------------------+
 | All column captions must have the same number of dimensions, separated by dots.   |
 +-----------------------------------------------------------------------------------+
 | Value matrix entries must be numeric and finite.                                  |
-|                                                                                   |
++-----------------------------------------------------------------------------------+
 | Data after the first empty row and column is ignored.                             |
 +-----------------------------------------------------------------------------------+
 
