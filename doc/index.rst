@@ -1,10 +1,7 @@
 GAMS and how to use it from MATLAB
 ==================================
 
-:Maintainer: Johannes Dorfner, <johannes.dorfner@tum.de>
-:Organization: `Institute for Renewable and Sustainable Energy Systems`_,
-               Technische Universität München
-:Version: |version|
+:Maintainer: Johannes Dorfner, <jdorfner@gmail.com>
 :Date: |today|
 :Copyright:
   The corresponding code is licensed under the `GNU General Public License 3.0`_.
@@ -48,5 +45,4 @@ Get ``GAMS.m`` and the usage examples from its `GitHub repository`_.
 .. _GitHub repository: https://github.com/ojdo/gams-matlab
 .. _GNU General Public License 3.0: http://www.gnu.org/licenses/gpl-3.0
 .. _Creative Commons Attribution 4.0 International: http://creativecommons.org/licenses/by/4.0/
-.. _Institute for Renewable and Sustainable Energy Systems: http://www.ens.ei.tum.de/
 
